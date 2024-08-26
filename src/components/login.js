@@ -1,68 +1,68 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './Login.css';
 
 const Login = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-        ...prevState,
-        [name]: value
-    }));
-};
+  const validateLogin = (username, password) => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (!storedUser) return 'Please register first.';
+    switch (true) {
+      case storedUser.username !== username:
+        return 'Invalid username.';
+      case storedUser.password !== password:
+        return 'Invalid password.';
+      default:
+        return '';
+    }
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    console.log('Form submitted:', formData);
-};
+  const handleLogin = () => {
+    const loginError = validateLogin(username, password);
+    if (loginError) {
+      setError(loginError);
+      return;
+    }
 
-return (
-    <div className="form-container">
-        <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label>Name:</label>
-                <input 
-                    type="text" 
-                    name="name" 
-                    value={formData.name} 
-                    onChange={handleChange} 
-                />
-            </div>
+    alert(`Welcome, ${username}!`);
+    navigate('/');
+  };
 
-            <div className="form-group">
-                <label>Email:</label>
-                <input 
-                    type="email" 
-                    name="email" 
-                    value={formData.email} 
-                    onChange={handleChange} 
-                />
-            </div>
-
-            <div className="form-group">
-                <label>Message:</label>
-                <textarea 
-                    name="message" 
-                    value={formData.message} 
-                    onChange={handleChange} 
-                />
-            </div>
-
-            <button type="submit">Submit</button>
-
-        </form>
-            {/* <div className="form-data">
-                <h3>Form Data:</h3>
-                <p>Name: {formData.name}</p>
-                <p>Email: {formData.email}</p>
-                <p>Message: {formData.message}</p>
-            </div> */}
+  return (
+    <div className="login-container">
+      <form className="login-form">
+        <h2>Login</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <div className="password-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span
+            className="password-toggle-icon"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
+        <button type="button" onClick={handleLogin}>Login</button>
+      </form>
     </div>
-);
+  );
 };
 
 export default Login;

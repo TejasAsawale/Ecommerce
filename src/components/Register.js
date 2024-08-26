@@ -1,106 +1,88 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth'; // Adjusted path based on directory structure
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './Register.css';
 
 const Register = () => {
-    const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        mobile: '',
-        address: '',
-        gender: '',
-        age: ''
-    });
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-    const { register } = useAuth();
-    const navigate = useNavigate();
+  const validateInput = (type, value) => {
+    switch (type) {
+      case 'email':
+        return /\S+@\S+\.\S+/.test(value) ? '' : 'Invalid email address.';
+      case 'password':
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/.test(value)
+          ? ''
+          : 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.';
+      case 'mobile':
+        return /^\d{10}$/.test(value) ? '' : 'Mobile number must be 10 digits.';
+      default:
+        return '';
+    }
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
+  const handleRegister = () => {
+    const emailError = validateInput('email', email);
+    const passwordError = validateInput('password', password);
+    const mobileError = validateInput('mobile', mobile);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Form submitted:', formData);
-        register(formData);
-        navigate('/login');
-    };
+    if (emailError || passwordError || mobileError) {
+      setError(emailError || passwordError || mobileError);
+      return;
+    }
 
-    return (
-        <div className="form-container">
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Username:</label>
-                    <input 
-                        type="text" 
-                        name="username" 
-                        value={formData.username} 
-                        onChange={handleChange} 
-                    />
-                </div>
+    const userData = { username, email, password, mobile };
+    localStorage.setItem('user', JSON.stringify(userData));
+    navigate('/login');
+  };
 
-                <div className="form-group">
-                    <label>Email:</label>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        value={formData.email} 
-                        onChange={handleChange} 
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label>Mobile Number:</label>
-                    <input 
-                        type="text" 
-                        name="mobile" 
-                        value={formData.mobile} 
-                        onChange={handleChange} 
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label>Address:</label>
-                    <input 
-                        type="text" 
-                        name="address" 
-                        value={formData.address} 
-                        onChange={handleChange} 
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label>Gender:</label>
-                    <select 
-                        name="gender" 
-                        value={formData.gender} 
-                        onChange={handleChange}
-                    >
-                        <option value="">Select</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div className="form-group">
-                    <label>Age:</label>
-                    <input 
-                        type="number" 
-                        name="age" 
-                        value={formData.age} 
-                        onChange={handleChange} 
-                    />
-                </div>
-
-                <button type="submit">Register</button>
-            </form>
+  return (
+    <div className="register-container">
+      <form className="register-form">
+        <h2>Register</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <div className="password-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span
+            className="password-toggle-icon"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </span>
         </div>
-    );
+        <input
+          type="text"
+          placeholder="Mobile Number"
+          value={mobile}
+          onChange={(e) => setMobile(e.target.value)}
+        />
+        <button type="button" onClick={handleRegister}>Register</button>
+      </form>
+    </div>
+  );
 };
 
 export default Register;

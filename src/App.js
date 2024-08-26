@@ -1,27 +1,26 @@
-import { BrowserRouter,Route, Routes } from 'react-router-dom';
-import './App.css';
-import Login from './components/login';
-import Register from './components/Register';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Register from './components/Register';
+import Login from './components/Login';
 import Home from './components/Home';
-import About from './components/About';
-import Contact from './components/Contact';
 
-function App() {
-  return (
-        <BrowserRouter>
-          <div className='App'>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />}/>
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-  );
-}
+const App = () => {
+    return (
+        <Router>
+        <Navbar />
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+        </Routes>
+        </Router>
+    );
+};
+
+const About = () => <h2>About Page</h2>;
+const Contact = () => <h2>Contact Us Page</h2>;
 
 export default App;
