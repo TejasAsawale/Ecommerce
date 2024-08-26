@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth'; // Adjusted path based on directory structure
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +12,9 @@ const Register = () => {
         age: ''
     });
 
+    const { register } = useAuth();
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -20,8 +25,9 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
         console.log('Form submitted:', formData);
+        register(formData);
+        navigate('/login');
     };
 
     return (
@@ -93,16 +99,6 @@ const Register = () => {
 
                 <button type="submit">Register</button>
             </form>
-
-            <div className="form-data">
-                <h3>Form Data:</h3>
-                <p>Username: {formData.username}</p>
-                <p>Email: {formData.email}</p>
-                <p>Mobile Number: {formData.mobile}</p>
-                <p>Address: {formData.address}</p>
-                <p>Gender: {formData.gender}</p>
-                <p>Age: {formData.age}</p>
-            </div>
         </div>
     );
 };

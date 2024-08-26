@@ -55,12 +55,12 @@ return (
             <button type="submit">Submit</button>
 
         </form>
-            <div className="form-data">
+            {/* <div className="form-data">
                 <h3>Form Data:</h3>
                 <p>Name: {formData.name}</p>
                 <p>Email: {formData.email}</p>
                 <p>Message: {formData.message}</p>
-            </div>
+            </div> */}
     </div>
 );
 };
