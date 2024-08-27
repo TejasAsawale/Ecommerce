@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import useAuth from '../hooks/useAuth';
 import './Register.css';
 
 const Register = () => {
@@ -10,6 +11,7 @@ const Register = () => {
   const [mobile, setMobile] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const validateInput = (type, value) => {
@@ -38,7 +40,7 @@ const Register = () => {
     }
 
     const userData = { username, email, password, mobile };
-    localStorage.setItem('user', JSON.stringify(userData));
+    register(userData);
     navigate('/login');
   };
 
@@ -46,7 +48,7 @@ const Register = () => {
     <div className="register-container">
       <form className="register-form">
         <h2>Register</h2>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className="error-message">{error}</p>}
         <input
           type="text"
           placeholder="Username"

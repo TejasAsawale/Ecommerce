@@ -1,36 +1,83 @@
 .navbar {
-    background-color: #333;
-    padding: 1rem;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #f8e8c1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Cursive', sans-serif;
 }
 
-.navbar-left,
-.navbar-right {
-    list-style-type: none;
+.navbar-logo {
     display: flex;
-    gap: 1rem;
-    margin: 0;
+    align-items: center;
+    flex: 1;
 }
 
-.navbar-left {
-    margin-left: 0;
+.logo {
+    height: 50px;
+    width: auto;
+    border-radius: 8px;
+    margin-right: 10px; /* Space between logo and brand name */
+}
+
+.brand-name {
+    font-size: 24px;
+    color: #7a5230;
+    font-weight: bold;
+    padding-left: 5px; /* Padding inside the brand name element */
+    margin-right: 20px; /* Margin to create space between brand name and navbar links */
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-center {
+    flex: 2;
+    justify-content: center; /* Center the links */
 }
 
 .navbar-right {
-    margin-right: 0;
+    justify-content: flex-end;
 }
 
-.navbar ul li {
-    display: inline;
+.navbar-left li,
+.navbar-center li,
+.navbar-right li {
+    margin: 0 15px;
 }
 
-.navbar ul li a {
-    color: white;
+.navbar-left a,
+.navbar-center a,
+.navbar-right a,
+.navbar-right button {
+    color: #7a5230;
     text-decoration: none;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
 }
 
-.navbar ul li a:hover {
-    text-decoration: underline;
+.navbar-left a:hover,
+.navbar-center a:hover,
+.navbar-right a:hover,
+.navbar-right button:hover {
+    background-color: #d7b893;
+    color: #fff;
+}
+
+.navbar-right button {
+    background: none;
+    border: 2px solid #7a5230;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.navbar-right button:hover {
+    background-color: #7a5230;
+    color: #fff;
 }

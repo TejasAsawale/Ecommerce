@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import useAuth from '../hooks/useAuth';
 import './Login.css';
 
 const Login = () => {
@@ -8,23 +9,11 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const validateLogin = (username, password) => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (!storedUser) return 'Please register first.';
-    switch (true) {
-      case storedUser.username !== username:
-        return 'Invalid username.';
-      case storedUser.password !== password:
-        return 'Invalid password.';
-      default:
-        return '';
-    }
-  };
-
   const handleLogin = () => {
-    const loginError = validateLogin(username, password);
+    const loginError = login(username, password);
     if (loginError) {
       setError(loginError);
       return;
@@ -38,7 +27,7 @@ const Login = () => {
     <div className="login-container">
       <form className="login-form">
         <h2>Login</h2>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className="error-message">{error}</p>}
         <input
           type="text"
           placeholder="Username"
