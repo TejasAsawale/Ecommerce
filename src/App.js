@@ -7,6 +7,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
 import { UserContextProvider } from './useContext/UserContextExample'; // Adjust the import as necessary
+import CardDetails from './components/CardDetails';
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/card-details" element={<CardDetails />}/>
                 </Routes>
             </UserContextProvider>
         </Router>

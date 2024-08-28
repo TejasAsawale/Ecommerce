@@ -1,6 +1,7 @@
 .home-container {
     padding: 20px;
     text-align: center;
+    background-color: #f8f8f8; /* Optional: light background color for better contrast */
 }
 
 .home-container h1 {
@@ -26,8 +27,31 @@
 
 .card-container {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
     margin-top: 20px;
+}
+
+.card {
+    flex: 1 1 calc(25% - 20px); /* 4 cards per row, minus the gap */
+    box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+    .card {
+        flex: 1 1 calc(33.33% - 20px); /* 3 cards per row */
+    }
+}
+
+@media (max-width: 992px) {
+    .card {
+        flex: 1 1 calc(50% - 20px); /* 2 cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(100% - 20px); /* 1 card per row */
+    }
 }

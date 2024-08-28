@@ -1,0 +1,24 @@
+.card-details {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-details-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.card-details-title {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card-details-description {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.6;
+}

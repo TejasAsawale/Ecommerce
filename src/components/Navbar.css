@@ -1,8 +1,9 @@
 .navbar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    padding: 10px 20px;
     background-color: #f8e8c1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Cursive', sans-serif;
@@ -15,39 +16,43 @@
 }
 
 .logo {
-    height: 50px;
+    height: 40px;
     width: auto;
     border-radius: 8px;
-    margin-right: 10px; /* Space between logo and brand name */
+    margin-right: 10px;
 }
 
 .brand-name {
-    font-size: 24px;
+    font-size: 20px;
     color: #7a5230;
     font-weight: bold;
-    padding-left: 5px; /* Padding inside the brand name element */
-    margin-right: 20px; /* Margin to create space between brand name and navbar links */
+    padding-left: 5px;
+    margin-right: 10px;
 }
 
 .navbar-links {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 }
 
 .navbar-center {
     flex: 2;
-    justify-content: center; /* Center the links */
+    justify-content: center;
+    text-align: center;
 }
 
 .navbar-right {
     justify-content: flex-end;
+    flex: 1;
+    text-align: right;
 }
 
 .navbar-left li,
 .navbar-center li,
 .navbar-right li {
-    margin: 0 15px;
+    margin: 5px 10px;
 }
 
 .navbar-left a,
@@ -56,8 +61,8 @@
 .navbar-right button {
     color: #7a5230;
     text-decoration: none;
-    font-size: 16px;
-    padding: 10px 20px;
+    font-size: 14px;
+    padding: 8px 15px;
     transition: background-color 0.3s, color 0.3s;
     border-radius: 4px;
 }
@@ -75,9 +80,72 @@
     border: 2px solid #7a5230;
     border-radius: 4px;
     cursor: pointer;
+    padding: 8px 15px;
 }
 
 .navbar-right button:hover {
     background-color: #7a5230;
     color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-logo {
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .navbar-center {
+        justify-content: flex-start;
+        order: 2;
+    }
+
+    .navbar-right {
+        justify-content: flex-start;
+        order: 3;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar-links li {
+        margin: 5px 0;
+    }
+
+    .brand-name {
+        font-size: 22px;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 5px 10px;
+    }
+
+    .brand-name {
+        font-size: 18px;
+    }
+
+    .logo {
+        height: 35px;
+    }
+
+    .navbar-left a,
+    .navbar-center a,
+    .navbar-right a,
+    .navbar-right button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
 }

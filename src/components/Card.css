@@ -1,18 +1,12 @@
+/* Card.css */
 .card {
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    max-width: 300px;
-    margin: 20px;
     background-color: #fff;
-    display: flex;
-    flex-direction: column;
-}
-
-.card:hover {
-    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 10px;
+    padding: 10px;
 }
 
 .card-image {
@@ -21,27 +15,26 @@
 }
 
 .card-content {
-    padding: 15px;
+    padding: 10px;
 }
 
 .card-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 1.2em;
+    margin: 10px 0;
 }
 
 .card-description {
     font-size: 1em;
-    color: #555;
-    margin-bottom: 15px;
+    color: #666;
 }
 
 .card-link {
-    text-decoration: none;
+    display: block;
+    margin-top: 10px;
     color: #007bff;
-    font-weight: bold;
+    text-decoration: none;
 }
 
 .card-link:hover {
-    color: #0056b3;
+    text-decoration: underline;
 }
